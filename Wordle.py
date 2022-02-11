@@ -81,6 +81,7 @@ def main():
         if(len(input_word.strip()) == 0):
             print("\nThank you for Playing.!")
             print("\nExiting")
+            displayResults(games_played, games_won, guess_history)
             break
 
         # check if entered word is having any special characters
