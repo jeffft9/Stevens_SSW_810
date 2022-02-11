@@ -53,8 +53,8 @@ while attempt < 6
 """
 # ********************************************************** SOURCE-CODE *******************************************************************
 
-from HW03_Jefferson_Dias_ui import *
-from HW03_Jefferson_Dias_dictionary import *
+from UI import *
+from Dictionary import *
 
 
 # Initialise all variables
