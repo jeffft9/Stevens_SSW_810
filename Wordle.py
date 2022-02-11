@@ -63,13 +63,16 @@ def initVariables():
     entered_words = []
     answer = [None, None, None, None, None]
     attempt = 0
-
+    # print(todays_word)
     return todays_word, word_list, entered_words, answer, attempt
 
 
 def main():
 
     todays_word, word_list, entered_words, answer, attempt = initVariables()
+    games_played = 0
+    games_won = 0
+    guess_history = []
 
     while attempt < 6:
         input_word = inputFromUser(attempt)
@@ -101,7 +104,13 @@ def main():
         if input_word == todays_word:
             print(" Congrats! You have correctly guessed today's word!",
                   '\n Thank you for Playing!!')
-            break
+            games_played += 1
+            games_won += 1
+            guess_history.append(attempt+1)
+            displayResults(games_played, games_won, guess_history)
+            todays_word, word_list, entered_words, answer, attempt = initVariables()
+            print("Starting a New Game, Press enter to exit")
+            continue
 
         letter_counts = {}
 
@@ -135,8 +144,17 @@ def main():
         if attempt == 6:
             print("\nUnfortunately, you were unable to guess today's word")
             print(f"Today's word was {todays_word}")
+            games_played += 1
+            guess_history.append("Unsuccessful")
+            displayResults(games_played, games_won, guess_history)
             todays_word, word_list, entered_words, answer, attempt = initVariables()
             print("Starting a New Game, Press enter to exit")
+
+
+def displayResults(games_played, games_won, guess_history):
+    print(f"\nNumber of Games Played : {games_played}")
+    print(f"Guess distribution : {guess_history}")
+    print(f"Win % : {(games_won/games_played)*100}")
 
 
 if __name__ == "__main__":
