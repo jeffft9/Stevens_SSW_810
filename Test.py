@@ -43,5 +43,35 @@ def test_word_used_three():
 
 def test_word_used_four():
     result = checkWordUsed(
-        "SHIFT", ["SONAR", "HELLO", "YEMEN", "COULD", "YACHT"])
+        "", ["SONAR", "HELLO", "YEMEN", "COULD", "YACHT"])
     assert(result == True)
+
+
+def test_word_length_one():
+    result = checkWordLength(
+        "     ")
+    assert(result == False)
+
+
+def test_word_length_two():
+    result = checkWordLength(
+        "")
+    assert(result == False)
+
+
+def test_word_length_three():
+    result = checkWordLength(
+        "SONAR")
+    assert(result == True)
+
+
+def test_word_length_three():
+    result = checkWordLength(
+        "SON")
+    assert(result == False)
+
+
+def test_word_length_three():
+    result = checkWordLength(
+        "SONARSONARSONAR")
+    assert(result == False)

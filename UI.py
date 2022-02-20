@@ -27,7 +27,7 @@ def checkWordUsed(input_word, entered_words):
 
 # check if entered word is of length 5
 def checkWordLength(input_word):
-    if len(input_word) != 5:
+    if len(input_word.strip()) != 5:
         print('\nWARNING : Word should be of length 5')
         return False
     else:
