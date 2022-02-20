@@ -86,3 +86,8 @@ def test_dict_word_length():
 def test_word_in_dict():
     todays_word, word_list = getRandomWord()
     assert(todays_word in word_list)
+
+
+def test_word_dict_isUpper():
+    todays_word, word_list = getRandomWord()
+    assert(todays_word.isupper())
