@@ -24,6 +24,11 @@ def test_num():
     assert(result == False)
 
 
+def test_multiple_words():
+    result = checkInput("Hello World")
+    assert(result == False)
+
+
 def test_word_used_one():
     result = checkWordUsed(
         "sonar".upper(), ["SONAR", "HELLO", "YEMEN", "COULD", "YACHT"])
