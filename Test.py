@@ -1,6 +1,7 @@
 import pytest
 
 from UI import *
+from Dictionary import *
 
 
 def test_both_empty():
@@ -75,3 +76,13 @@ def test_word_length_three():
     result = checkWordLength(
         "SONARSONARSONAR")
     assert(result == False)
+
+
+def test_dict_word_length():
+    todays_word, word_list = getRandomWord()
+    assert(len(todays_word) == 5)
+
+
+def test_word_in_dict():
+    todays_word, word_list = getRandomWord()
+    assert(todays_word in word_list)
