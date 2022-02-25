@@ -157,6 +157,11 @@ def displayResults(games_played, games_won, guess_history):
     print(f"Guess distribution : {guess_history}")
     print(f"Win % : {(games_won/games_played)*100}")
 
+    f = open("gameplay.log", "a")
+    f.write((f"Number of Games Played : {games_played}\n"))
+    f.write(f"Guess distribution : {guess_history}\n")
+    f.write(f"Win % : {(games_won/games_played)*100}\n\n")
+
 
 if __name__ == "__main__":
     main()
