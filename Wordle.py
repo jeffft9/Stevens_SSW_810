@@ -58,18 +58,21 @@ from Dictionary import *
 
 
 # Initialise all variables
-def initVariables():
-    todays_word, word_list = getRandomWord()
+def initVariables(words_used):
+    todays_word, word_list = getRandomWord(words_used)
+    words_used.append(todays_word)
     entered_words = []
     answer = [None, None, None, None, None]
     attempt = 0
     # print(todays_word)
-    return todays_word, word_list, entered_words, answer, attempt
+    return todays_word, word_list, entered_words, answer, attempt, words_used
 
 
 def main():
 
-    todays_word, word_list, entered_words, answer, attempt = initVariables()
+    words_used = []
+    todays_word, word_list, entered_words, answer, attempt, words_used = initVariables(
+        words_used)
     games_played = 0
     games_won = 0
     guess_history = []
@@ -109,7 +112,8 @@ def main():
             games_won += 1
             guess_history.append(attempt+1)
             displayResults(games_played, games_won, guess_history)
-            todays_word, word_list, entered_words, answer, attempt = initVariables()
+            todays_word, word_list, entered_words, answer, attempt, words_used = initVariables(
+                words_used)
             print("Starting a New Game, Press enter to exit")
             continue
 
@@ -148,7 +152,8 @@ def main():
             games_played += 1
             guess_history.append("Unsuccessful")
             displayResults(games_played, games_won, guess_history)
-            todays_word, word_list, entered_words, answer, attempt = initVariables()
+            todays_word, word_list, entered_words, answer, attempt, words_used = initVariables(
+                words_used)
             print("Starting a New Game, Press enter to exit")
 
 

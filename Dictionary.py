@@ -3,7 +3,7 @@ import random
 # Return a random word of length 5 from given words file
 
 
-def getRandomWord():
+def getRandomWord(words_used):
     f = open("words.txt", "r")
     new_file = open("new_words.txt", "w")
     myWordList = []
@@ -12,6 +12,14 @@ def getRandomWord():
             myWordList.append(x[:-1].upper())
             # writing to new file "new_file.txt"
             new_file.write(f"{x.upper()}")
+
+    for item in words_used:
+        myWordList.remove(item)
+
+    if len(myWordList) == 0:
+        for x in f:
+            if(len(x) == 6):  # words contain '\n' at the end which counts as 1 character, hence 6
+                myWordList.append(x[:-1].upper())
 
     word = random.choices(myWordList)
     for item in word:
