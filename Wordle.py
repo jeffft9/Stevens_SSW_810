@@ -58,18 +58,29 @@ from Dictionary import *
 
 
 # Initialise all variables
-def initVariables():
-    todays_word, word_list = getRandomWord()
+def initVariables(words_used):
+    todays_word, word_list = getRandomWord(words_used)
+    words_used.append(todays_word)
     entered_words = []
     answer = [None, None, None, None, None]
     attempt = 0
     # print(todays_word)
+<<<<<<< HEAD
     return todays_word, word_list, entered_words, answer, attempt
+=======
+    return todays_word, word_list, entered_words, answer, attempt, words_used
+>>>>>>> Dev
 
 
 def main():
 
+<<<<<<< HEAD
     todays_word, word_list, entered_words, answer, attempt = initVariables()
+=======
+    words_used = []
+    todays_word, word_list, entered_words, answer, attempt, words_used = initVariables(
+        words_used)
+>>>>>>> Dev
     games_played = 0
     games_won = 0
     guess_history = []
@@ -109,7 +120,12 @@ def main():
             games_won += 1
             guess_history.append(attempt+1)
             displayResults(games_played, games_won, guess_history)
+<<<<<<< HEAD
             todays_word, word_list, entered_words, answer, attempt = initVariables()
+=======
+            todays_word, word_list, entered_words, answer, attempt, words_used = initVariables(
+                words_used)
+>>>>>>> Dev
             print("Starting a New Game, Press enter to exit")
             continue
 
@@ -148,7 +164,12 @@ def main():
             games_played += 1
             guess_history.append("Unsuccessful")
             displayResults(games_played, games_won, guess_history)
+<<<<<<< HEAD
             todays_word, word_list, entered_words, answer, attempt = initVariables()
+=======
+            todays_word, word_list, entered_words, answer, attempt, words_used = initVariables(
+                words_used)
+>>>>>>> Dev
             print("Starting a New Game, Press enter to exit")
 
 
@@ -157,6 +178,14 @@ def displayResults(games_played, games_won, guess_history):
     print(f"Guess distribution : {guess_history}")
     print(f"Win % : {(games_won/games_played)*100}")
 
+<<<<<<< HEAD
+=======
+    f = open("gameplay.log", "a")
+    f.write((f"Number of Games Played : {games_played}\n"))
+    f.write(f"Guess distribution : {guess_history}\n")
+    f.write(f"Win % : {(games_won/games_played)*100}\n\n")
+
+>>>>>>> Dev
 
 if __name__ == "__main__":
     main()
