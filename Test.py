@@ -2,6 +2,7 @@ import pytest
 
 from UI import *
 from Dictionary import *
+from Wordle import *
 
 
 def test_both_empty():
@@ -84,15 +85,19 @@ def test_word_length_three():
 
 
 def test_dict_word_length():
-    todays_word, word_list = getRandomWord()
+    todays_word, word_list = getRandomWord(["YACHT"])
     assert(len(todays_word) == 5)
 
 
 def test_word_in_dict():
-    todays_word, word_list = getRandomWord()
+    todays_word, word_list = getRandomWord(["YACHT"])
     assert(todays_word in word_list)
 
 
 def test_word_dict_isUpper():
-    todays_word, word_list = getRandomWord()
+    todays_word, word_list = getRandomWord(["YACHT"])
     assert(todays_word.isupper())
+
+
+def test_divide_by_zero():
+    assert(displayResults(0, 0, []) == None)
