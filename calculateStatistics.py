@@ -1,5 +1,8 @@
 # Function to calculate frequency of every letter in every position
-def calculateFrequencyOfLetters():
+from typing import Dict, List, Tuple
+
+
+def calculateFrequencyOfLetters() -> None:
     try:
         f = open("new_words.txt", "r")
 
@@ -40,15 +43,17 @@ def calculateFrequencyOfLetters():
 
 
 # convert the list containing frequency of letters to a tuple
-def convert_tuple(data):
+def convert_tuple(data: Dict[str, List]) -> Dict[str, Tuple]:
     new_data = {}
 
     for key in data.keys():
         new_data[key] = tuple(data[key])
 
+    return new_data
+
 
 # read letterFrequency.csv and convert the list containing frequency to a tuple
-def read_and_make_tuple():
+def read_and_make_tuple() -> Dict[str, tuple]:
     calculateFrequencyOfLetters()
     try:
         fsnew = open("letterFrequency.csv", "r")
@@ -60,16 +65,17 @@ def read_and_make_tuple():
             answer[key] = tuple(element[1:-1])
 
         fsnew.close()
-        return answer
 
     except IOError:
         print('An error occured trying to read the file.')
         print('Please make sure "letterFrequency.csv" is present in the directory before running the program')
         quit()
 
+    return answer
+
 
 # calculate weight of word, sort according to it and write to wordRank.csv
-def calculateAndSortWords():
+def calculateAndSortWords() -> None:
     inputData = read_and_make_tuple()
     try:
         answer = {}
