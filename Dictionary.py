@@ -1,10 +1,10 @@
 import random
-from typing import List
+from typing import List, Tuple
 
 # Return a random word of length 5 from given words file
 
 
-def getRandomWord(words_used: List[str]):
+def getRandomWord(words_used: List[str]) -> Tuple[str, List]:
     try:
         f = open("words.txt", "r")
         new_file = open("new_words.txt", "w")
