@@ -16,7 +16,12 @@ def calculateFrequencyOfLetters():
         for key in data.keys():
             for item in range(5):
                 data[key][item] = round(data[key][item]/count, 3)
+    except IOError:
+        print('An error occured trying to read the file.')
+        print('Please make sure "new_words.txt" is present in the directory before running the program')
+        quit()
 
+    try:
         fs = open("letterFrequency.csv", "w")
 
         fs.write("letter,first_pos,second_pos,third_pos,fourth_pos,fifth_pos\n")
@@ -30,7 +35,7 @@ def calculateFrequencyOfLetters():
 
     except IOError:
         print('An error occured trying to read the file.')
-        print('Please make sure "new_words.txt" is present in the directory before running the program')
+        print('Please make sure "letterFrequency.csv" is present in the directory before running the program')
         quit()
 
 
