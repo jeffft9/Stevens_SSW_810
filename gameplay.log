@@ -51,3 +51,93 @@ Number of Games Played : 4
 Guess distribution : [1, 'Unsuccessful', 'Unsuccessful', 'Unsuccessful']
 Win % : 25.0
 
+Number of Games Played : 1
+Guess distribution : ['Unsuccessful']
+Win % : 0.0
+
+Number of Games Played : 1
+Guess distribution : ['Unsuccessful']
+Win % : 0.0
+
+Number of Games Played : 1
+Guess distribution : ['Unsuccessful']
+Win % : 0.0
+
+Number of Games Played : 0
+Guess distribution : []
+Number of Games Played : 0
+Guess distribution : []
+Win % : 0
+
+Number of Games Played : 1
+Guess distribution : ['Unsuccessful']
+Win % : 0.0
+
+Number of Games Played : 1
+Guess distribution : ['Unsuccessful']
+Win % : 0.0
+
+Number of Games Played : 1
+Guess distribution : ['Unsuccessful']
+Win % : 0.0
+
+Number of Games Played : 1
+Guess distribution : ['Unsuccessful']
+Win % : 0.0
+
+Number of Games Played : 1
+Guess distribution : ['Unsuccessful']
+Win % : 0.0
+
+Number of Games Played : 1
+Guess distribution : ['Unsuccessful']
+Win % : 0.0
+
+Number of Games Played : 1
+Guess distribution : [1]
+Win % : 100.0
+
+Number of Games Played : 2
+Guess distribution : [1, 1]
+Win % : 100.0
+
+Number of Games Played : 3
+Guess distribution : [1, 1, 1]
+Win % : 100.0
+
+Number of Games Played : 4
+Guess distribution : [1, 1, 1, 'Unsuccessful']
+Win % : 75.0
+
+Number of Games Played : 1
+Guess distribution : [1]
+Win % : 100.0
+
+Number of Games Played : 2
+Guess distribution : [1, 1]
+Win % : 100.0
+
+Number of Games Played : 2
+Guess distribution : [1, 1]
+Win % : 100.0
+
+Number of Games Played : 0
+Guess distribution : []
+Win % : 0
+
+Number of Games Played : 1
+Guess distribution : [1]
+Win % : 100.0
+
+Number of Games Played : 2
+Guess distribution : [1, 1]
+Win % : 100.0
+
+Number of Games Played : 3
+Guess distribution : [1, 1, 1]
+Win % : 100.0
+
+Number of Games Played : 3
+Guess distribution : [1, 1, 1]
+Win % : 100.0
+

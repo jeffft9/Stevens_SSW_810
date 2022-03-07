@@ -53,18 +53,22 @@ while attempt < 6
 """
 # ********************************************************** SOURCE-CODE *******************************************************************
 
+from decimal import DivisionByZero
 from UI import *
 from Dictionary import *
-
+from calculateStatistics import *
+from typing import List
 
 # Initialise all variables
-def initVariables(words_used):
+
+
+def initVariables(words_used: List[str]) -> Tuple[str, List, List, str, int, List]:
     todays_word, word_list = getRandomWord(words_used)
     words_used.append(todays_word)
     entered_words = []
     answer = [None, None, None, None, None]
     attempt = 0
-    # print(todays_word)
+    print(todays_word)
     return todays_word, word_list, entered_words, answer, attempt, words_used
 
 
@@ -157,16 +161,28 @@ def main():
             print("Starting a New Game, Press enter to exit")
 
 
-def displayResults(games_played, games_won, guess_history):
+def displayResults(games_played: int, games_won: int, guess_history: List[str]) -> None:
     print(f"\nNumber of Games Played : {games_played}")
     print(f"Guess distribution : {guess_history}")
-    print(f"Win % : {(games_won/games_played)*100}")
 
-    f = open("gameplay.log", "a")
-    f.write((f"Number of Games Played : {games_played}\n"))
-    f.write(f"Guess distribution : {guess_history}\n")
-    f.write(f"Win % : {(games_won/games_played)*100}\n\n")
+    try:
+        print(f"Win % : {(games_won/games_played)*100}")
+    except ZeroDivisionError:
+        print('Win % : 0')
+
+    try:
+        f = open("gameplay.log", "a")
+        f.write((f"Number of Games Played : {games_played}\n"))
+        f.write(f"Guess distribution : {guess_history}\n")
+        f.write(f"Win % : {(games_won/games_played)*100}\n\n")
+    except IOError:
+        print('An error occured trying to read the file.')
+        print('Please make sure "gameplay.log" is present in the directory before running the program')
+        quit()
+    except ZeroDivisionError:
+        f.write(f"Win % : 0\n\n")
 
 
 if __name__ == "__main__":
     main()
+    calculateAndSortWords()
