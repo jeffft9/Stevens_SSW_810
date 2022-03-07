@@ -55,6 +55,7 @@ while attempt < 6
 
 from UI import *
 from Dictionary import *
+from calculateStatistics import *
 
 
 # Initialise all variables
@@ -170,3 +171,4 @@ def displayResults(games_played, games_won, guess_history):
 
 if __name__ == "__main__":
     main()
+    calculateAndSortWords()

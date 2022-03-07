@@ -100,6 +100,3 @@ def calculateAndSortWords():
         print('An error occured trying to read the file.')
         print('Please make sure "wordRank.csv" is present in the directory before running the program')
         quit()
-
-
-calculateAndSortWords()
