@@ -59,13 +59,18 @@ import Dictionary as dictionaryClass
 from calculateStatistics import CalculateStatistics
 from typing import Dict, List, Tuple
 
-# Initialise all variables
+"""The structure of this Class is such that it does not need getters or setters since 
+all data is acquired from another Class in the constructor"""
 
 
 class Wordle:
     def __init__(self) -> None:
         self.dictionary = dictionaryClass.Dictionary()
 
+    def __str__(self) -> None:
+        return "Main Game class"
+
+    # Initialise all variables
     def initVariables(self, words_used: List[str]) -> Tuple[str, List, List, str, int, List]:
         todays_word, word_list = self.dictionary.getRandomWord(words_used)
         # print(str(self.dictionary))

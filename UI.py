@@ -1,6 +1,8 @@
 # Get input from user
 from typing import List
 
+"""This class is just for validations hence it does not contain __init__ or __str__ or getters and setters"""
+
 
 class Ui:
     def inputFromUser(attempt: int) -> str:

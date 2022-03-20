@@ -1,6 +1,8 @@
 # Function to calculate frequency of every letter in every position
 from typing import Dict, List, Tuple
 
+"""This class is just for populating the statistics CSVs hence it does not contain __init__ or __str__ or getters and setters"""
+
 
 class CalculateStatistics:
 
