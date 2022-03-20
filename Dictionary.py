@@ -19,7 +19,7 @@ class Dictionary:
         self.myWordList = inputWordList
         self.finalWord = inputfinalWord
 
-        # Return a random word of length 5 from given words file
+    # Return a random word of length 5 from given words file
 
     def getRandomWord(self, words_used: List[str]) -> Tuple[str, List]:
         try:
