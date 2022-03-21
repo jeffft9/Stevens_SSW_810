@@ -1,103 +1,109 @@
 import pytest
 
-from UI import *
-from Dictionary import *
-from Wordle import *
+# from UI import *
+# from Dictionary import *
+from UI import Ui
+import Dictionary as dictionaryClass
+from Wordle import Wordle
 
 
 def test_both_empty():
-    result = checkInput("sonar")
+    result = Ui.checkInput("sonar")
     assert(result == True)
 
 
 def test_upper():
-    result = checkInput("SONAR")
+    result = Ui.checkInput("SONAR")
     assert(result == True)
 
 
 def test_empty():
-    result = checkInput("")
+    result = Ui.checkInput("")
     assert(result == False)
 
 
 def test_num():
-    result = checkInput("12345")
+    result = Ui.checkInput("12345")
     assert(result == False)
 
 
 def test_multiple_words():
-    result = checkInput("Hello World")
+    result = Ui.checkInput("Hello World")
     assert(result == False)
 
 
 def test_word_used_one():
-    result = checkWordUsed(
+    result = Ui.checkWordUsed(
         "sonar".upper(), ["SONAR", "HELLO", "YEMEN", "COULD", "YACHT"])
     assert(result == False)
 
 
 def test_word_used_two():
-    result = checkWordUsed(
+    result = Ui.checkWordUsed(
         "SONAR".upper(), ["SONAR", "HELLO", "YEMEN", "COULD", "YACHT"])
     assert(result == False)
 
 
 def test_word_used_three():
-    result = checkWordUsed(
+    result = Ui.checkWordUsed(
         "SHIFT", ["SONAR", "HELLO", "YEMEN", "COULD", "YACHT"])
     assert(result == True)
 
 
 def test_word_used_four():
-    result = checkWordUsed(
+    result = Ui.checkWordUsed(
         "", ["SONAR", "HELLO", "YEMEN", "COULD", "YACHT"])
     assert(result == True)
 
 
 def test_word_length_one():
-    result = checkWordLength(
+    result = Ui.checkWordLength(
         "     ")
     assert(result == False)
 
 
 def test_word_length_two():
-    result = checkWordLength(
+    result = Ui.checkWordLength(
         "")
     assert(result == False)
 
 
 def test_word_length_three():
-    result = checkWordLength(
+    result = Ui.checkWordLength(
         "SONAR")
     assert(result == True)
 
 
 def test_word_length_three():
-    result = checkWordLength(
+    result = Ui.checkWordLength(
         "SON")
     assert(result == False)
 
 
 def test_word_length_three():
-    result = checkWordLength(
+    result = Ui.checkWordLength(
         "SONARSONARSONAR")
     assert(result == False)
 
 
 def test_dict_word_length():
-    todays_word, word_list = getRandomWord(["YACHT"])
+    todays_word, word_list = dictionaryClass.Dictionary().getRandomWord([
+        "YACHT"])
     assert(len(todays_word) == 5)
 
 
 def test_word_in_dict():
-    todays_word, word_list = getRandomWord(["YACHT"])
+    todays_word, word_list = dictionaryClass.Dictionary().getRandomWord([
+        "YACHT"])
     assert(todays_word in word_list)
 
 
 def test_word_dict_isUpper():
-    todays_word, word_list = getRandomWord(["YACHT"])
+    todays_word, word_list = dictionaryClass.Dictionary().getRandomWord([
+        "YACHT"])
     assert(todays_word.isupper())
 
 
 def test_divide_by_zero():
-    assert(displayResults(0, 0, []) == None)
+    game = Wordle()
+    assert(game.displayResults(0, 0, []) == None)
