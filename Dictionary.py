@@ -1,38 +1,56 @@
 import random
 from typing import List, Tuple
 
-# Return a random word of length 5 from given words file
 
+class Dictionary:
+    def __init__(self) -> None:
+        self.myWordList = []
+        self.finalWord = ""
 
-def getRandomWord(words_used: List[str]) -> Tuple[str, List]:
-    try:
-        f = open("words.txt", "r")
-        new_file = open("new_words.txt", "w")
-        myWordList = []
-        for x in f:
-            if(len(x) == 6):  # words contain '\n' at the end which counts as 1 character, hence 6
-                myWordList.append(x[:-1].upper())
-                # writing to new file "new_file.txt"
-                new_file.write(f"{x.upper()}")
+    def __str__(self) -> str:
+        return str(self.finalWord)
 
-        for item in words_used:
-            myWordList.remove(item)
+    # Getter
+    def getter(self):
+        return self.myWordList, self.finalWord
 
-        if len(myWordList) == 0:
+    # Setter
+    def setter(self, inputWordList, inputfinalWord):
+        self.myWordList = inputWordList
+        self.finalWord = inputfinalWord
+
+    # Return a random word of length 5 from given words file
+
+    def getRandomWord(self, words_used: List[str]) -> Tuple[str, List]:
+        try:
+            f = open("words.txt", "r")
+            new_file = open("new_words.txt", "w")
+
             for x in f:
                 if(len(x) == 6):  # words contain '\n' at the end which counts as 1 character, hence 6
-                    myWordList.append(x[:-1].upper())
+                    self.myWordList.append(x[:-1].upper())
+                    # writing to new file "new_file.txt"
+                    new_file.write(f"{x.upper()}")
 
-        word = random.choices(myWordList)
-        for item in word:
-            finalWord = item
+            for item in words_used:
+                self.myWordList.remove(item)
 
-        f.close()
-        new_file.close()
+            if len(self.myWordList) == 0:
+                for x in f:
+                    if(len(x) == 6):  # words contain '\n' at the end which counts as 1 character, hence 6
+                        self.myWordList.append(x[:-1].upper())
 
-    except IOError:
-        print('An error occured trying to read the file.')
-        print('Please make sure "words.txt" is present in the directory before running the program')
-        quit()
-    else:
-        return finalWord.upper(), myWordList
+            word = random.choices(self.myWordList)
+            for item in word:
+                self.finalWord = item
+
+            f.close()
+            new_file.close()
+
+        except IOError:
+            print('An error occured trying to read the file.')
+            print(
+                'Please make sure "words.txt" is present in the directory before running the program')
+            quit()
+        else:
+            return self.finalWord.upper(), self.myWordList
