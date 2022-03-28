@@ -1,7 +1,6 @@
 from platform import node
 from LinkedList import Node
 from LinkedList import SLinkedList
-from UI import Ui
 
 
 def main():
@@ -10,6 +9,10 @@ def main():
     while playMore:
         goodWords = input("Enter all good letters : ").upper()
         if not all(x.isalpha() or x.isspace() for x in goodWords):
+            continue
+
+        if len(goodWords) > 5:
+            print("You can have only 5 maximum good letters")
             continue
 
         goodWords = list(goodWords.strip())
@@ -45,6 +48,7 @@ def main():
             for x in fs:
                 wordlist.append(x[0:5])
 
+            # If user does not provide Good or bad words, then display top 50 words
             if len(goodWords) == 0 and len(badWords) == 0:
                 # print(wordlist[:50])
                 linkedList = SLinkedList()

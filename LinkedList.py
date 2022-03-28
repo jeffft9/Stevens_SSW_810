@@ -15,6 +15,6 @@ class SLinkedList:
         printval = self.headval
         print("Printing Linked List : ")
         while printval is not None:
-            print(f"{printval.dataval} -> ", end=" ")
+            print(f"{printval.dataval} ->", end=" ")
             printval = printval.nextval
-        print("NULL")
+        print("NULL(End of list)")
