@@ -1,14 +1,39 @@
+from platform import node
+from LinkedList import Node
+from LinkedList import SLinkedList
+from UI import Ui
+
 
 def main():
 
     playMore = True
     while playMore:
         goodWords = input("Enter all good letters : ").upper()
+        if not all(x.isalpha() or x.isspace() for x in goodWords):
+            continue
+
         goodWords = list(goodWords.strip())
+
         badWords = input("Enter all bad letters : ").upper()
+        if not all(x.isalpha() or x.isspace() for x in badWords):
+            continue
+
         badWords = list(badWords.strip())
+
+        if any(x in goodWords for x in badWords):
+            print('\nWARNING : A letter cannot be both good and bad!')
+            continue
+
         positionWords = input(
             "Enter characters in position, leave space where unknown : ").upper()
+        if len(positionWords) != 0:
+            if len(positionWords) != 5:
+                print('\nWARNING : Word should be of length 5 or empty')
+                continue
+
+        if not all(x.isalpha() or x.isspace() for x in positionWords):
+            print('\nWARNING : Please enter a word containing only Alphabets or Spaces.')
+            continue
 
         try:
             fs = open("wordRank.csv", "r")
@@ -21,7 +46,18 @@ def main():
                 wordlist.append(x[0:5])
 
             if len(goodWords) == 0 and len(badWords) == 0:
-                print(wordlist[:50])
+                # print(wordlist[:50])
+                linkedList = SLinkedList()
+                linkedList.headval = Node(wordlist[0])
+                node1 = linkedList.headval
+
+                for val in wordlist[1:50]:
+                    node1.nextval = Node(val)
+                    node1 = node1.nextval
+
+                # print(copyTentative)
+                print()
+                linkedList.listprint()
                 break
 
             for x in wordlist:
@@ -48,7 +84,18 @@ def main():
                             copyTentative.remove(x)
                             break
 
-            print(copyTentative)
+            linkedList = SLinkedList()
+            linkedList.headval = Node(copyTentative[0])
+            node1 = linkedList.headval
+
+            for val in copyTentative[1:]:
+                node1.nextval = Node(val)
+                node1 = node1.nextval
+
+            # print(copyTentative)
+            print()
+            linkedList.listprint()
+
             fs.close()
         except IOError:
             print('An error occured trying to read the file.')
@@ -56,7 +103,7 @@ def main():
                 'Please make sure "wordRank.csv" is present in the directory before running the program')
             quit()
 
-        userInput = input("Do you want to add more? : Y/N ")
+        userInput = input("\nDo you want to try again? : Y/N ")
 
         if not userInput:
             print("Invalid Input, Quitting....")
@@ -70,4 +117,5 @@ def main():
             break
 
 
-main()
+if __name__ == "__main__":
+    main()
