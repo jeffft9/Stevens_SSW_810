@@ -2,7 +2,7 @@
 """
 Wordle game Pseudo-code
 
-Note - Output String is displayed in form of a List for better Display and understanding 
+Note - Output String is displayed in form of a List for better Display and understanding
 
 get a random word from text file
 
@@ -13,7 +13,7 @@ while attempt < 6
     if length of input_word is 0
         quit playing
 
-    if input_word is not present in dictionary 
+    if input_word is not present in dictionary
         give warning and start again
 
     if input_word is having characters other than alphabets
@@ -41,7 +41,7 @@ while attempt < 6
                 print i is present but in wrong position
                 reduce count in dictionary - letter_counts
 
-    
+
     add input_word to entered_words
     attempt+=1
 
@@ -58,8 +58,9 @@ from UI import Ui
 import Dictionary as dictionaryClass
 from calculateStatistics import CalculateStatistics
 from typing import Dict, List, Tuple
+from Helper import Helper
 
-"""The structure of this Class is such that it does not need getters or setters since 
+"""The structure of this Class is such that it does not need getters or setters since
 all data is acquired from another Class in the constructor"""
 
 
@@ -71,27 +72,40 @@ class Wordle:
         return "Main Game class"
 
     # Initialise all variables
-    def initVariables(self, words_used: List[str]) -> Tuple[str, List, List, str, int, List]:
+    def initVariables(self, words_used: List[str]) -> Tuple[str, List, List, str, int, List, str, str]:
         todays_word, word_list = self.dictionary.getRandomWord(words_used)
         # print(str(self.dictionary))
         words_used.append(todays_word)
         entered_words = []
         answer = [None, None, None, None, None]
         attempt = 0
+        good_letters = ""
+        bad_letters = ""
         # print(todays_word)
-        return todays_word, word_list, entered_words, answer, attempt, words_used
+        return todays_word, word_list, entered_words, answer, attempt, words_used, good_letters, bad_letters
 
     def main(self):
 
         words_used = []
-        todays_word, word_list, entered_words, answer, attempt, words_used = self.initVariables(
+        todays_word, word_list, entered_words, answer, attempt, words_used, good_letters, bad_letters = self.initVariables(
             words_used)
         games_played = 0
         games_won = 0
         guess_history = []
 
         while attempt < 6:
-            input_word = Ui.inputFromUser(attempt)
+            # input_word = Ui.inputFromUser(attempt)
+            new_answer = ""
+            if all(v is not None for v in answer):
+                for char in answer:
+                    if char == "`" or char == '"':
+                        new_answer += " "
+                    else:
+                        new_answer += char
+            input_word = Helper.help(
+                good_letters, bad_letters, new_answer, entered_words)
+
+            print(f"Word chosen for attempt - {attempt+1} : {input_word}")
 
             # if empty word entered then quit playing
             if(len(input_word.strip()) == 0):
@@ -119,16 +133,18 @@ class Wordle:
 
             # check if the guess is correct
             if input_word == todays_word:
-                print(" Congrats! You have correctly guessed today's word!",
+                print(" \nCongrats! You have correctly guessed today's word!",
                       '\n Thank you for Playing!!')
+                print(f" The word was {todays_word}")
                 games_played += 1
                 games_won += 1
                 guess_history.append(attempt+1)
                 self.displayResults(games_played, games_won, guess_history)
-                todays_word, word_list, entered_words, answer, attempt, words_used = self.initVariables(
+                todays_word, word_list, entered_words, answer, attempt, words_used, good_letters, bad_letters = self.initVariables(
                     words_used)
-                print("Starting a New Game, Press enter to exit")
-                continue
+                # print("Starting a New Game, Press enter to exit")
+                # continue
+                break
 
             letter_counts = {}
 
@@ -144,6 +160,8 @@ class Wordle:
                 if input_word[index] == todays_word[index]:
                     answer[index] = todays_word[index]
                     letter_counts[todays_word[index]] -= 1
+                    if input_word[index] not in good_letters:
+                        good_letters += input_word[index]
                 else:
                     answer[index] = '"'
 
@@ -154,10 +172,17 @@ class Wordle:
                         if letter_counts[input_word[index]] > 0:
                             letter_counts[input_word[index]] -= 1
                             answer[index] = "`"
+                            if input_word[index] not in good_letters:
+                                good_letters += input_word[index]
+                    else:
+                        if input_word[index] not in bad_letters:
+                            bad_letters += input_word[index]
 
             entered_words.append(input_word)
             attempt += 1
-            print(answer)
+
+            print(f"The good letters for chosen word : " + good_letters)
+            print(f"The bad letters for chosen word : " + bad_letters)
 
             if attempt == 6:
                 print("\nUnfortunately, you were unable to guess today's word")
@@ -165,9 +190,10 @@ class Wordle:
                 games_played += 1
                 guess_history.append("Unsuccessful")
                 self.displayResults(games_played, games_won, guess_history)
-                todays_word, word_list, entered_words, answer, attempt, words_used = self.initVariables(
+                todays_word, word_list, entered_words, answer, attempt, words_used, good_letters, bad_letters = self.initVariables(
                     words_used)
-                print("Starting a New Game, Press enter to exit")
+                # print("Starting a New Game, Press enter to exit")
+                break
 
     def displayResults(self, games_played: int, games_won: int, guess_history: List[str]) -> None:
         print(f"\nNumber of Games Played : {games_played}")
