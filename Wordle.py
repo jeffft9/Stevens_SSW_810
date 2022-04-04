@@ -209,6 +209,7 @@ class Wordle:
             f.write((f"Number of Games Played : {games_played}\n"))
             f.write(f"Guess distribution : {guess_history}\n")
             f.write(f"Win % : {(games_won/games_played)*100}\n\n")
+            f.close()
         except IOError:
             print('An error occured trying to read the file.')
             print(
