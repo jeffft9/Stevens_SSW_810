@@ -33,7 +33,8 @@ class Dictionary:
                     new_file.write(f"{x.upper()}")
 
             for item in words_used:
-                self.myWordList.remove(item)
+                if item in self.myWordList:
+                    self.myWordList.remove(item)
 
             if len(self.myWordList) == 0:
                 for x in f:
