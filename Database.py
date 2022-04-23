@@ -23,6 +23,7 @@ def queryWordle():
     c = con.cursor()
 
     c.execute("SELECT * FROM wordle")
+    print("Table 1 : Wordle")
     for column in c.description:
         print(column[0], end=" ")
     print()
@@ -78,6 +79,7 @@ def calcStats():
               (successful, unsuccessful, avgAttemptsToWin))
 
     c.execute("SELECT * FROM WordleStats")
+    print("Table 2 : WordleStats")
     for column in c.description:
         print(column[0], end=" ")
     con.commit()
